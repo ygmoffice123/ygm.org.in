@@ -24,7 +24,7 @@ const ClientCard = ({ item, index, isAdmin, onDelete, onEdit }) => {
       toast.error('Failed to delete client')
     }
   }
-  console.log(item);
+  // console.log(item);
   
 
   return (

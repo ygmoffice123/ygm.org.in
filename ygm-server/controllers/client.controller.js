@@ -24,7 +24,16 @@ const fetchClients = asyncHandler(async (req, res) => {
     throw new ApiError(404, "No clients found.");
   }
 
-  const totalCount = await ClientModel.countDocuments();
+const totalCountData = await ClientModel.aggregate([
+  {
+    $group: { _id: "$name" }   // group by unique client names
+  },
+  {
+    $count: "totalCount"
+  }
+]);
+
+const totalCount = totalCountData.length > 0 ? totalCountData[0].totalCount : 0;
 
   return res
     .status(200)
@@ -85,12 +94,23 @@ const addClient = asyncHandler(async (req, res) => {
     throw new ApiError(400, "Client data is required.");
   }
 
-  const newClient = await ClientModel.create(clientData);
+  let newClients;
 
-  return res
-    .status(201)
-    .json(new ApiResponse(201, newClient, "Client created successfully."));
+  // Check if clientData is an array (multiple clients)
+  if (Array.isArray(clientData)) {
+    newClients = await ClientModel.insertMany(clientData);
+    return res
+      .status(201)
+      .json(new ApiResponse(201, newClients, "Multiple clients created successfully."));
+  } else {
+    // Single client
+    newClients = await ClientModel.create(clientData);
+    return res
+      .status(201)
+      .json(new ApiResponse(201, newClients, "Client created successfully."));
+  }
 });
+
 
 
 const deleteClient = asyncHandler(async (req, res) => {

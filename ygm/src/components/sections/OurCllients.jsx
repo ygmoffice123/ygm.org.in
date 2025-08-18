@@ -10,6 +10,10 @@ const OurClients = () => {
 
   // Auto-fetch first page on mount
   useEffect(() => {
+console.log("client:",clients.length);
+console.log("total client:",totalClients);
+
+
     if (clients.length === 0) {
       dispatch(fetchClients());
     }
@@ -37,7 +41,7 @@ const OurClients = () => {
         <h2 className="text-3xl font-semibold mb-6 text-center text-yellow-400">Our Clients</h2>
 
         <div
-          className="grid gap-6"
+          className="grid gap-6 justify-items-center pr-3"
           style={{ gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))" }}
         >
           {clients.map((item, index) => (
