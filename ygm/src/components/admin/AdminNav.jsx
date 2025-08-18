@@ -20,8 +20,8 @@ const AdminNav = () => {
   ];
 
   return (
-    <div className={`${isOpen ? "fixed z-20" : "flex"}`} >
-      {/* Sidebar */}
+    <div className={`flex`}>
+      {/* Sidebar */}   
       <div
         className={`bg-gray-800 text-white h-screen transition-all duration-300 ${
           isOpen ? "w-64" : "w-16"
