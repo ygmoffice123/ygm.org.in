@@ -3,8 +3,8 @@ import AdminServiceCard from "./AdminServiceCard";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchServices, deleteService } from "../../../utils/redux/slices/serviceDataSlice.js";
 import { toast, Toaster } from "react-hot-toast";
-import AddServiceForm from "./addServiceForm";
 import { RiResetLeftLine } from "react-icons/ri";
+import ServiceForm from "./ServiceForm.jsx";
 
 const AdminService = () => {
   const dispatch = useDispatch();
@@ -65,8 +65,9 @@ const AdminService = () => {
                     <button className="btn btn-ghost " onClick={handleReset}><RiResetLeftLine/></button>
         </h2>
         <div ref={formRef}>
-        <AddServiceForm  isEdit={isEdit} editData={editData}/>
-
+        {/* <AddServiceForm  isEdit={isEdit} editData={editData}/> */}
+        <ServiceForm  isEdit={isEdit} editData={editData}/>
+        
         </div>
       </div>
 
