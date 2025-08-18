@@ -2,6 +2,8 @@ import React from "react";
 import { navItems } from "../constants";
 import { IoClose } from "react-icons/io5";
 import { IoMdArrowBack } from "react-icons/io";
+import {Link} from 'react-router'
+
 const SideNav = ({ setIsSideNavOpen, sideNavRef, activeSection }) => {
   return (
     <div className="sideNav w-[80%] md:w-[50%] flex justify-center pt-20 h-screen bg-black/70 absolute z-50 right-0 top-0 bottom-0 transition-all duration-300">
