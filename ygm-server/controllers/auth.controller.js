@@ -35,12 +35,11 @@ const registerAdmin = asyncHandler(async (req, res) => {
     const accessToken = generateAccessToken({ _id: newAdmin._id });
 
     // Set token in HTTP-only cookie
-    res.cookie("token", accessToken, {
+    res.cookie("accessToken", accessToken, {
       httpOnly: true,
-      secure: true,
-      sameSite: "strict",
-      // maxAge: 15 * 60 * 1000, // 15 minutes
-      maxAge: 1 * 60 * 60 * 1000, // 1 hour
+  secure: process.env.NODE_ENV === "production", // sirf production me HTTPS ke sath
+  sameSite: "strict", 
+  maxAge: 60 * 60 * 1000, // 1 hour
     });
 
     // Respond
@@ -64,10 +63,10 @@ const loginAdmin = asyncHandler(async (req, res) => {
   const accessToken = generateAccessToken({ _id: admin._id });
 
   res.cookie("accessToken", accessToken, {
-    httpOnly: true,
-    secure: true,
-    sameSite: "strict",
-    maxAge: 1 * 60 * 60 * 1000,
+   httpOnly: true,
+  secure: process.env.NODE_ENV === "production", // sirf production me HTTPS ke sath
+  sameSite: "strict", 
+  maxAge: 60 * 60 * 1000, // 1 hour
   });
 
   res.status(200).json(new ApiResponse(200, { admin }, "Login successful"));
@@ -77,9 +76,9 @@ const loginAdmin = asyncHandler(async (req, res) => {
 
 const adminLogOut = asyncHandler(async (req, res) => {
   res.clearCookie("accessToken", {
-    httpOnly: true,
-    secure: true,      // set to true in production with HTTPS
-    sameSite: "strict" // or "lax" depending on your use
+   httpOnly: true,
+  secure: process.env.NODE_ENV === "production",
+  sameSite: "strict"
   });
 
   res.status(200).json({
@@ -117,10 +116,10 @@ const editAdmin = asyncHandler(async (req, res) => {
   const accessToken = generateAccessToken({ _id: newAdmin._id });
 
 res.cookie("accessToken", accessToken, {
-  httpOnly: true,
-  secure: false,         // <-- explicitly set to false for local dev
-  sameSite: "strict",
-  maxAge: 1 * 60 * 60 * 1000, // 1 hour
+   httpOnly: true,
+  secure: process.env.NODE_ENV === "production", // sirf production me HTTPS ke sath
+  sameSite: "strict", 
+  maxAge: 60 * 60 * 1000, // 1 hour
 });
 
 
