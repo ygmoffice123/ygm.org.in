@@ -1,13 +1,12 @@
 import React from 'react';
-import AdminNavbar from './AdminNavBar';
 import { Outlet } from 'react-router'; // make sure it's from 'react-router-dom'
+import AdminNavbar from './AdminNavBar';
 
 const AdminLayout = () => {
   return (
     <div className="min-h-screen bg-[#000000] flex w-screen">
       <div className=''>
-      <AdminNavbar />
-
+      <AdminNavbar/>
       </div>
       <main className="w-full h-screen overflow-y-scroll">
         <Outlet />
