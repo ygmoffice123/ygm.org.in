@@ -2,6 +2,7 @@ import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import React, { useRef } from 'react'
+import { slide1_img, slide1_vid } from '../../../data/imageAndVideos'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -60,7 +61,7 @@ const Slide1 = () => {
     playsInline
   >
     <source 
-    src="https://res.cloudinary.com/ddivcdnu4/video/upload/v1755436484/video1_4_aithpy.mp4" 
+    src={slide1_vid} 
     type="video/mp4" />
     Your browser does not support the video tag.
   </video>
@@ -74,7 +75,7 @@ const Slide1 = () => {
     <div className="flex-0 md:flex-1 max-w-lg lg:max-w-xl">
       <img
         ref={imgRef}
-        src="https://images.pexels.com/photos/269077/pexels-photo-269077.jpeg"
+        src={slide1_img}
         alt="Who We Are"
         className="w-full rounded-3xl shadow-2xl border-4 border-[#FFD700]"
       />

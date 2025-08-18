@@ -1,6 +1,7 @@
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import React, { useRef, useEffect } from 'react';
+import { slide2_img, slide2_vid } from '../../../data/imageAndVideos';
 
 function Slide2() {
   const textRef = useRef();
@@ -35,7 +36,7 @@ function Slide2() {
 <div className="slide shrink-0 h-screen w-screen relative overflow-hidden">
   {/* Background Image */}
   <img
-    src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1600&q=80"
+    src={slide2_img}
     alt="Our Vision"
     className="absolute inset-0  w-full h-screen  object-cover"
   />
@@ -74,7 +75,7 @@ function Slide2() {
         muted
         playsInline
       >
-        <source src="https://res.cloudinary.com/ddivcdnu4/video/upload/v1755436484/video1_4_aithpy.mp4"  type="video/mp4" />
+        <source src={slide2_vid}  type="video/mp4" />
         Your browser does not support the video tag.
       </video>
     </div>

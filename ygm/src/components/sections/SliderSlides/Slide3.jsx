@@ -1,4 +1,5 @@
 import React from 'react'
+import { slide3_vid } from '../../../data/imageAndVideos'
 
 const Slide3 = () => {
   return (
@@ -11,7 +12,7 @@ const Slide3 = () => {
     muted
     playsInline
   >
-    <source src="https://res.cloudinary.com/ddivcdnu4/video/upload/v1755436484/video1_4_aithpy.mp4" type="video/mp4" />
+    <source src={slide3_vid} type="video/mp4" />
     Your browser does not support the video tag.
   </video>
 
