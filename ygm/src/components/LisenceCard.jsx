@@ -16,7 +16,7 @@ const LisenceCard = ({ item, isAdmin, onDelete }) => {
   }
 
   return (
-    <div className="group relative h-64 w-64 rounded-3xl overflow-hidden shadow-lg hover:scale-105 hover:shadow-2xl transition-transform duration-500 ease-in-out border border-[#FFD700]/40 bg-[#0F0F0F]">
+    <div className="group relative h-64 w-full sm:w-64 rounded-3xl overflow-hidden shadow-lg hover:scale-105 hover:shadow-2xl transition-transform duration-500 ease-in-out border border-[#FFD700]/40 bg-[#0F0F0F]">
       {isAdmin && (
         <button
           onClick={handleDelete}
