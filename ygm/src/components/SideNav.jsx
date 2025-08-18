@@ -33,7 +33,7 @@ const SideNav = ({ setIsSideNavOpen, sideNavRef, activeSection }) => {
                {item.type == "link" ? (<a href={`#${item.id}`}>{item.name}</a>) :(<Link to={`${item.id}`}>{item.name} </Link> )}
           </li>
         ))}
-              <li className="absolute bottom-10 cursor-pointer   transition-colors duration-300 text-[#FFD700]">
+              <li className="absolute bottom-20 cursor-pointer   transition-colors duration-300 text-[#FFD700]">
 <div className=" flex justify-center items-center gap-3"  onClick={()=>setIsSideNavOpen(false)}><IoMdArrowBack size={30}/> <span>Close Menu</span></div>
           </li>
       </ul>
