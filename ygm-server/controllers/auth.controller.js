@@ -64,12 +64,12 @@ const loginAdmin = asyncHandler(async (req, res) => {
   const accessToken = generateAccessToken({ _id: admin._id });
 
   // ✅ Save token in HTTP-only cookie
-  res.cookie("accessToken", accessToken, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production", // only secure in production
-    sameSite: "strict",
-    maxAge: 60 * 60 * 1000, // 1 hour
-  });
+  // res.cookie("accessToken", accessToken, {
+  //   httpOnly: true,
+  //   secure: process.env.NODE_ENV === "production", // only secure in production
+  //   sameSite: "strict",
+  //   maxAge: 60 * 60 * 1000, // 1 hour
+  // });
 
   // ✅ Also return token in response (for localStorage fallback)
   res.status(200).json(
