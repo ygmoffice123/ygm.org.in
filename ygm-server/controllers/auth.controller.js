@@ -44,15 +44,16 @@ const registerAdmin = asyncHandler(async (req, res) => {
 
     // Respond
     return res.status(201).json(
-      new ApiResponse(201, {admin:newAdmin}, "Admin registered successfully")
+      new ApiResponse(201, {admin:newAdmin ,token: accessToken }, "Admin registered successfully")
     );
 });
 
 const loginAdmin = asyncHandler(async (req, res) => {
-  
   const { email, password } = req.body;
-  console.log(req.body);
-  if (!email || !password) throw new ApiError(400, "All fields are required");
+
+  if (!email || !password) {
+    throw new ApiError(400, "All fields are required");
+  }
 
   const admin = await adminModel.findOne({ email });
   if (!admin) throw new ApiError(401, "Invalid email or password");
@@ -62,14 +63,18 @@ const loginAdmin = asyncHandler(async (req, res) => {
 
   const accessToken = generateAccessToken({ _id: admin._id });
 
+  // ✅ Save token in HTTP-only cookie
   res.cookie("accessToken", accessToken, {
-   httpOnly: true,
-  secure: process.env.NODE_ENV === "production", // sirf production me HTTPS ke sath
-  sameSite: "strict", 
-  maxAge: 60 * 60 * 1000, // 1 hour
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production", // only secure in production
+    sameSite: "strict",
+    maxAge: 60 * 60 * 1000, // 1 hour
   });
 
-  res.status(200).json(new ApiResponse(200, { admin }, "Login successful"));
+  // ✅ Also return token in response (for localStorage fallback)
+  res.status(200).json(
+    new ApiResponse(200, { admin, token: accessToken }, "Login successful")
+  );
 });
 
 
@@ -123,9 +128,9 @@ res.cookie("accessToken", accessToken, {
 });
 
 
-  return res
-    .status(201)
-    .json(new ApiResponse(201, { admin: newAdmin }, "Admin updated successfully"));
+ return res.status(201).json(
+  new ApiResponse(201, { admin: newAdmin, token: accessToken }, "Admin updated successfully")
+);
 });
 
 
@@ -137,9 +142,10 @@ const getAdmin = asyncHandler(async (req, res) => {
     throw new ApiError(404, "Admin not found");
   }
 
-  return res
-    .status(200)
-    .json(new ApiResponse(200, user, "Admin fetched successfully"));
+return res
+  .status(200)
+  .json(new ApiResponse(200, { admin: user }, "Admin fetched successfully"));
+
 });
 
 
