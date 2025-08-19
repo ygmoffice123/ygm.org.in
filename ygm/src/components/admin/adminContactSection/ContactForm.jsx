@@ -72,7 +72,7 @@ const ContactForm = () => {
 
       <form
         onSubmit={handleSubmit}
-        className="p-6 max-w-3xl bg-black border border-yellow-500/30 rounded-xl shadow-xl space-y-6 text-yellow-100"
+        className="p-6 max-w-3xl mx-auto bg-black border border-yellow-500/30 rounded-xl shadow-xl space-y-6 text-yellow-100"
       >
         <h2 className="text-2xl font-semibold border-b border-yellow-500/30 pb-3">
           Contact Details

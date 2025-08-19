@@ -73,7 +73,8 @@ useEffect(() => {
           </Route>
 
           <Route path="admin" element={<ProtectedRoute> <AdminLayout/> </ProtectedRoute>}>
-              <Route  path="clients" element={<AdminClients  />} />
+              {/* <Route  index element={<AdminDashboard/>} /> */}
+              <Route path="clients" element={<AdminClients  />} />
               <Route path="services" element={<AdminService  />}/>
               <Route path="strength" element={<AdminStrengths  />} />
               <Route path="contact" element={<ContactForm  />} />

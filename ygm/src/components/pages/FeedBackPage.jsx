@@ -11,6 +11,7 @@ const FeedBackPage = () => {
   );
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     if (feedback.length === 0) dispatch(fetchFeedbacks());
   }, [dispatch]);
 
