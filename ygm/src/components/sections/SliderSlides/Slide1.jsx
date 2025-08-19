@@ -92,12 +92,12 @@ const Slide1 = () => {
         <span className="font-bold text-[#FFD700]">Yash Govind Marketing</span> (YGM) is a trusted outsourcing partner delivering <span className="text-[#FFD700]">21+ years of excellence</span> in Housekeeping, Security, and Manpower Supply. We empower businesses with certified, skilled, and reliable teams tailored to their needs.
       </p>
 
-      <a
+      {/* <a
         href="#about"
         className="inline-block px-8 py-4 text-lg font-semibold bg-[#FFD700] rounded-full shadow hover:shadow-xl hover:bg-[#C5A017] hover:scale-105"
       >
         Learn More About Us
-      </a>
+      </a> */}
     </div>
   </div>
 </div>

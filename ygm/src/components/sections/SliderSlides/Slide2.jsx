@@ -57,13 +57,13 @@ function Slide2() {
         At <span className="font-semibold text-[#FFD700]">YGM</span>, we envision a future where businesses thrive through <span className="text-[#FFD700] font-semibold">seamless outsourcing solutions</span>, and individuals achieve growth through meaningful employment. Our goal is to build partnerships that deliver lasting impact.
       </p>
 
-      <a
+      {/* <a
         href="#vision"
         ref={buttonRef}
         className="inline-block px-8 py-4 text-lg font-semibold bg-gradient-to-r from-[#FFD700] to-[#C5A017] rounded-full shadow-lg hover:shadow-2xl hover:from-[#C5A017] hover:to-[#FFD700] transform hover:scale-105"
       >
         Discover Our Vision
-      </a>
+      </a> */}
     </div>
 
     {/* Video Section */}

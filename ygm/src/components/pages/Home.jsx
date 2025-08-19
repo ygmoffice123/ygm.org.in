@@ -7,6 +7,7 @@ import Slider3 from '../sections/SliderSlides/Slider3';
 import OurClients from '../sections/OurCllients';
 import HowWeWork from '../sections/HowWeWork';
 import LineChart from '../sections/LineChart';
+import { FaArrowUp } from "react-icons/fa";
 
 const Home = () => {
   return (
@@ -52,6 +53,21 @@ const Home = () => {
       <section id="contact" className="pt-7 scroll-mt-20">
         <Contact />
       </section>
+
+ <div
+      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+      className="
+        md:w-[50px] md:h-[50px] w-[40px] h-[40px] 
+        rounded-full flex justify-center items-center
+        bg-white/10 backdrop-blur-xl 
+        border border-white/30 shadow-lg
+        z-[100] fixed bottom-10 right-10 
+        cursor-pointer transition 
+        hover:bg-white/20 hover:scale-110
+      "
+    >
+      <FaArrowUp size={22} className="text-white drop-shadow" />
+    </div>
 
     </div>
   );

@@ -5,6 +5,7 @@ import Footer from '../sections/Footer'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap'
 
+
 const Layout = () => {
   // const [x, setX] = useState(0)
   // const [y, setY] = useState(0)
@@ -27,10 +28,11 @@ const Layout = () => {
   return (
     // <div onMouseMove={handleMouseMove} className='relative '>
     //   <div className='cursor-dot fixed w-10 h-10 rounded-full bg-transparent border-3 border-amber-600 pointer-events-none z-9999'></div>
-    <div>
+    <div className='relative'>
       <NavBar />
       <Outlet />
       <Footer />
+    
     </div>
   )
 }
