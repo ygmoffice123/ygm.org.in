@@ -3,14 +3,27 @@ import ApiError from "../utils/ApiError.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 
+
 const fetchClients = asyncHandler(async (req, res) => {
   const { currentPage, limit } = req.params;
   const skip = parseInt(currentPage) * parseInt(limit);
 
   const clients = await ClientModel.aggregate([
-    { $sort: { updatedAt: -1 } },       // sort by last updated first
-    { $group: { _id: "$name", doc: { $first: "$$ROOT" } } }, // pick latest per client
+    // Group by name, pick the one with max updatedAt
+    {
+      $group: {
+        _id: "$name",
+        doc: { $first: "$$ROOT" }
+      }
+    },
+
+    // Replace doc as root
     { $replaceRoot: { newRoot: "$doc" } },
+
+    // Now sort all unique clients by updatedAt (latest first)
+    { $sort: { updatedAt: -1 } },
+
+    // Pagination
     { $skip: skip },
     { $limit: parseInt(limit) }
   ]);
@@ -33,6 +46,7 @@ const fetchClients = asyncHandler(async (req, res) => {
     )
   );
 });
+
 
 
 
