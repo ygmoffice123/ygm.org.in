@@ -14,7 +14,7 @@ const AdminClients = () => {
   const [editData, setEditData] = useState(null);
 
   const { isAuthenticated, admin } = useSelector(state => state.admin);
-  const isAdmin = isAuthenticated && admin?.role === 'admin';
+  const isAdmin = isAuthenticated && admin?.admin?.role === 'admin';
 
   const sectionRef = useRef();
 
