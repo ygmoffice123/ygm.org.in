@@ -8,13 +8,13 @@ const AdminNav = () => {
   const [isOpen, setIsOpen] = useState(true);
 
   const navItems = [
-    // { name: "Dashboard", path: "/admin", icon: <FaTachometerAlt /> },
+    { name: "Dashboard", path: "/admin", icon: <FaTachometerAlt /> },
     { name: "Services", path: "/admin/services", icon: <FaServicestack /> },
     { name: "Clients", path: "/admin/clients", icon: <FaUsers /> },
     { name: "Strength", path: "/admin/strength", icon: <FaDumbbell /> },
     { name: "Contact", path: "/admin/contact", icon: <FaEnvelope /> },
     { name: "Feedback", path: "/admin/feedback", icon: <FaEnvelope /> },
-    { name: "About", path: "/admin/about", icon: <FaInfoCircle /> },
+    { name: "Admin", path: "/admin/about", icon: <FaInfoCircle /> },
     { name: "Founder", path: "/admin/founder", icon: <FaUserTie /> },
     { name: "Logout", path: "/admin/admin-logout", icon: <FiLogOut /> },
   ];

@@ -26,6 +26,7 @@ import { fetchStrengths } from "./utils/redux/slices/strengthDataSlice.js";
 import { fetchContact } from "./utils/redux/slices/contacDatatSlice.js";
 import { fetchServices } from "./utils/redux/slices/serviceDataSlice.js";
 import { fetchAdmin } from "./utils/redux/slices/adminSlice.js";
+import AdminDashboard from "./components/admin/AdminDashboard.jsx";
 
 
 const App = () => {
@@ -73,8 +74,9 @@ useEffect(() => {
           </Route>
 
           <Route path="admin" element={<ProtectedRoute> <AdminLayout/> </ProtectedRoute>}>
-              {/* <Route  index element={<AdminDashboard/>} /> */}
+              <Route  index element={<AdminDashboard/>} />
               <Route path="clients" element={<AdminClients  />} />
+              {/* <Route index element={<AdminClients  />} /> */}
               <Route path="services" element={<AdminService  />}/>
               <Route path="strength" element={<AdminStrengths  />} />
               <Route path="contact" element={<ContactForm  />} />

@@ -80,8 +80,8 @@ const AdminClients = () => {
       console.log(editData);
       setEditData(editData)
       console.log(editData);
-      
-  
+sectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+
   }
   return (
     <div
