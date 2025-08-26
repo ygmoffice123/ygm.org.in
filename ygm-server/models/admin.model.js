@@ -50,6 +50,11 @@ adminSchema.pre('save', async function (next) {
 
 // Method to compare plain password with hashed password
 adminSchema.methods.comparePassword = async function (candidatePassword) {
+
+
+
+  console.log(candidatePassword);
+  
   return await bcrypt.compare(candidatePassword, this.password);
 };
 

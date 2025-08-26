@@ -151,16 +151,22 @@ return res
 
 export const changePassword = async (req, res) => {
   try {
-    const { currentPassword, newPassword } = req.body;
+    const {oldPassword: currentPassword , newPassword } = req.body;
     const adminId = req.user._id; // comes from JWT middleware
+    console.log(currentPassword);
+    console.log(newPassword);
 
+
+    
+    
     const admin = await adminModel.findById(adminId);
+    
     if (!admin) return res.status(404).json({ message: "Admin not found" });
-
+    
     const isMatch = await admin.comparePassword(currentPassword);
     if (!isMatch)
       return res.status(400).json({ message: "Current password is incorrect" });
-
+    
     admin.password = newPassword; // will be hashed by pre('save')
     await admin.save();
 
