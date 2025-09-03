@@ -23,6 +23,8 @@ const ChangePasswordForm = () => {
       return;
     }
 
+    console.log(formData);
+    
     try {
       setLoading(true);
       setMessage(null);
@@ -33,6 +35,8 @@ const ChangePasswordForm = () => {
       setMessage({ type: "success", text: res.data.message || "Password updated successfully" });
       setFormData({ oldPassword: "", newPassword: "", confirmPassword: "" });
     } catch (error) {
+      console.log(error.message);
+      
       setMessage({ type: "error", text: error.response?.data?.message || "Something went wrong" });
     } finally {
       setLoading(false);

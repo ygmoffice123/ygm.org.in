@@ -12,7 +12,8 @@ const AdminStrengths = () => {
   const dispatch = useDispatch();
   const { data: licenses, loading, error } = useSelector(state => state.strengths);
   const { isAuthenticated, admin } = useSelector(state => state.admin);
-  const isAdmin = isAuthenticated && admin?.admin?.role === 'admin';
+  // const isAdmin = isAuthenticated && admin?.admin?.role === 'admin';
+  const isAdmin = isAuthenticated ;
 
   // useEffect(() => {
   //   dispatch(fetchStrengths());

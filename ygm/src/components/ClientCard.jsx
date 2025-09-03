@@ -1,8 +1,16 @@
 import React from 'react'
 import { FaTrash } from 'react-icons/fa'
 import { Toaster, toast } from "react-hot-toast"
+import { GrUpdate } from "react-icons/gr";
+import { useState } from 'react'
+import axiosInstance from '../utils/axios';
 
-const ClientCard = ({ item, index, isAdmin, onDelete, onEdit }) => {
+const ClientCard = ({ item, index, isAdmin, onDelete, onEdit ,fetch}) => {
+
+
+  const [editOrderOpen , setEditOrderOpen] = useState(false)
+  const [order , setOrder] = useState(item.order)
+  const [orderLoading , setOrderLoading] = useState(false)
 
   const handleDelete = async () => {
     const confirmDelete = window.confirm('Are you sure you want to delete this client?')
@@ -27,6 +35,37 @@ const ClientCard = ({ item, index, isAdmin, onDelete, onEdit }) => {
   // console.log(item);
   
 
+const handleChangeOrder = async () => {
+  setOrderLoading(true)
+  try {
+    const res = await axiosInstance.put(
+      `/clients/edit-client-order/${item._id}`,
+      {
+        newPosition: order,        // nayi position jo aap set karna chahte ho
+        prePosition: item.order,   // purani position jo pehle thi
+      }
+    );
+
+    // Agar API call success ho jaye
+    console.log("Order updated:", res.data);
+    fetch()
+    setEditOrderOpen(false);
+      setOrderLoading(false)
+
+  } catch (error) {
+    // Error handling aur readable error message
+    if (error.response) {
+      console.error("Server Error:", error.response.data);
+    } else if (error.request) {
+      console.error("No response from server:", error.request);
+    } else {
+      console.error("Error:", error.message);
+    }
+  }
+};
+
+
+
   return (
     <div
       className="w-full md:w-[300px] rounded-xl shadow-lg bg-[#1A1A1A] hover:shadow-2xl transition-shadow duration-300 overflow-hidden relative"
@@ -48,6 +87,31 @@ const ClientCard = ({ item, index, isAdmin, onDelete, onEdit }) => {
         >
           edit
         </button>
+      
+
+      {
+        editOrderOpen ? (
+         <div className="join">
+  <div>
+    <label className="input validator join-item">
+     
+      <input className='w-15' type="number" value={order} onChange={(e)=>setOrder(e.target.value)}/>
+    </label>
+  </div>
+  {
+    orderLoading ? (
+      <span className="loading loading-spinner loading-lg"></span>
+    ):(
+        <button className="btn btn-neutral  join-item" onClick={handleChangeOrder}><GrUpdate size={20}/></button>
+    )
+  }
+
+</div>
+          
+        ) : (
+          <div className="badge badge-neutral" onClick={()=>setEditOrderOpen(pre => !pre)}>{item.order} </div>
+        )
+      }
         </div>
 
       )}

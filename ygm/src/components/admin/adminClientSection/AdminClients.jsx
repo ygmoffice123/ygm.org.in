@@ -9,12 +9,20 @@ import axiosInstance from '../../../utils/axios';
 import {  FaUsers  } from "react-icons/fa";
 
 const AdminClients = () => {
+  const { isAuthenticated, admin } = useSelector(state => state.admin);
+  // console.log(admin.);
+  
+
+  // const [isAdmin , setIsAdmin] = useState(isAuthenticated && admin?.admin?.role === 'admin')
+  // const isAdmin = isAuthenticated && admin?.admin?.role === 'admin';
+  const isAdmin = isAuthenticated ;
   const [clients, setClients] = useState([]);
   const [loading, setLoading] = useState(false);
   const [editData, setEditData] = useState(null);
 
-  const { isAuthenticated, admin } = useSelector(state => state.admin);
-  const isAdmin = isAuthenticated && admin?.admin?.role === 'admin';
+
+  console.log(admin);
+  
 
   const sectionRef = useRef();
 
@@ -124,6 +132,7 @@ sectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
                 isAdmin={isAdmin}
                 onDelete={handleDelete}
                 onEdit={handleEdit}
+                fetch={fetchClients}
               />
             ))}
           </div>

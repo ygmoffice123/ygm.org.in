@@ -4,55 +4,106 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 
 
-const fetchClients = asyncHandler(async (req, res) => {
-  const { currentPage, limit } = req.params;
-  const skip = parseInt(currentPage) * parseInt(limit);
+// const fetchClients = asyncHandler(async (req, res) => {
+//   const { currentPage, limit } = req.params;
+//   const skip = parseInt(currentPage) * parseInt(limit);
 
-  const clients = await ClientModel.aggregate([
-    // Group by name, pick the one with max updatedAt
-    {
-      $group: {
-        _id: "$name",
-        doc: { $first: "$$ROOT" }
-      }
-    },
+//   const clients = await ClientModel.aggregate([
+//     // Group by name, pick the one with max updatedAt
+//     {
+//       $group: {
+//         _id: "$name",
+//         doc: { $first: "$$ROOT" }
+//       }
+//     },
 
-    // Replace doc as root
-    { $replaceRoot: { newRoot: "$doc" } },
+//     // Replace doc as root
+//     { $replaceRoot: { newRoot: "$doc" } },
 
-    // Now sort all unique clients by updatedAt (latest first)
-    { $sort: { updatedAt: -1 } },
+//     // Now sort all unique clients by updatedAt (latest first)
+//     { $sort: { updatedAt: -1 } },
 
-    // Pagination
-    { $skip: skip },
-    { $limit: parseInt(limit) }
-  ]);
+//     // Pagination
+//     { $skip: skip },
+//     { $limit: parseInt(limit) }
+//   ]);
 
-  if (!clients || clients.length === 0) {
-    throw new ApiError(404, "No clients found.");
-  }
+//   if (!clients || clients.length === 0) {
+//     throw new ApiError(404, "No clients found.");
+//   }
 
-  const totalCountData = await ClientModel.aggregate([
-    { $group: { _id: "$name" } },
-    { $count: "totalCount" }
-  ]);
-  const totalCount = totalCountData.length > 0 ? totalCountData[0].totalCount : 0;
+//   const totalCountData = await ClientModel.aggregate([
+//     { $group: { _id: "$name" } },
+//     { $count: "totalCount" }
+//   ]);
+//   const totalCount = totalCountData.length > 0 ? totalCountData[0].totalCount : 0;
 
-  return res.status(200).json(
-    new ApiResponse(
-      200,
-      { clients, totalCount },
-      "Clients retrieved successfully."
-    )
-  );
-});
+//   return res.status(200).json(
+//     new ApiResponse(
+//       200,
+//       { clients, totalCount },
+//       "Clients retrieved successfully."
+//     )
+//   );
+// });
+
+
+  const fetchClients = asyncHandler(async (req, res) => {
+    const { currentPage, limit } = req.params;
+    const skip = parseInt(currentPage) * parseInt(limit);
+
+    const clients = await ClientModel.aggregate([
+
+        // { $addFields: { order: { $ifNull: ["$order", 9999] } } },
+
+      // Step 1: Sort documents by order ASC (min order first, latest updatedAt tiebreaker)
+      { $sort: { order: 1, updatedAt: -1 } },
+
+      // Step 2: Group by name, pick first (which is min order because of sort above)
+      {
+        $group: {
+          _id: "$name",
+          doc: { $first: "$$ROOT" }
+        }
+      },
+
+      // Step 3: Replace doc as root
+      { $replaceRoot: { newRoot: "$doc" } },
+
+      // Step 4: Global sort again by order ASC
+      { $sort: { order: 1 } },
+
+      // Step 5: Pagination
+      { $skip: skip },
+      { $limit: parseInt(limit) }
+    ]);
+
+    if (!clients || clients.length === 0) {
+      throw new ApiError(404, "No clients found.");
+    }
+
+    // Count unique names
+    const totalCountData = await ClientModel.aggregate([
+      { $group: { _id: "$name" } },
+      { $count: "totalCount" }
+    ]);
+    const totalCount = totalCountData.length > 0 ? totalCountData[0].totalCount : 0;
+
+    return res.status(200).json(
+      new ApiResponse(
+        200,
+        { clients, totalCount },
+        "Clients retrieved successfully."
+      )
+    );
+  });
 
 
 
 
 const getAllClient = asyncHandler(async (req, res) => {
 
-  const clients = await ClientModel.find().lean();
+  const clients = await ClientModel.find().sort({order:1}).lean();
 
   if (!clients || clients.length === 0) {
     throw new ApiError(404, "No clients found.");
@@ -134,6 +185,9 @@ const deleteClient = asyncHandler(async (req, res) => {
     .json(new ApiResponse(200, deletedClient, "Client deleted successfully."));
 });
 
+
+
+
 const editClient = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const updatedData = req.body;
@@ -161,11 +215,48 @@ const editClient = asyncHandler(async (req, res) => {
 });
 
 
+
+
+const editClientOrder = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  const { prePosition, newPosition } = req.body;
+
+  if (!id) throw new ApiError(400, "Client ID parameter is missing.");
+  if (!prePosition || !newPosition) throw new ApiError(400, "Client position is required.");
+
+  let updatedClient;
+
+  if (newPosition > prePosition) {
+    // Moving down
+    updatedClient = await ClientModel.updateMany(
+      { order: { $gt: prePosition, $lte: newPosition } },
+      { $inc: { order: -1 } }
+    );
+  } else if (newPosition < prePosition) {
+    // Moving up
+    updatedClient = await ClientModel.updateMany(
+      { order: { $gte: newPosition, $lt: prePosition } },
+      { $inc: { order: 1 } }
+    );
+  }
+
+  // Finally update moved item itself
+  await ClientModel.findByIdAndUpdate(id, { order: newPosition });
+
+  return res.status(200).json(
+    new ApiResponse(200, updatedClient, "Client order updated successfully.")
+  );
+});
+
+
+
+
 export {
   fetchClients,
   addClient,
   deleteClient,
   fetchClientsByService,
   getAllClient,
-  editClient
+  editClient,
+  editClientOrder
 };
