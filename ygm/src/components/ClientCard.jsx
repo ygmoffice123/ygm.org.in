@@ -41,19 +41,19 @@ const handleChangeOrder = async () => {
     const res = await axiosInstance.put(
       `/clients/edit-client-order/${item._id}`,
       {
-        newPosition: order,        // nayi position jo aap set karna chahte ho
-        prePosition: item.order,   // purani position jo pehle thi
+        newPosition: order,       
+        prePosition: item.order,  
       }
     );
 
-    // Agar API call success ho jaye
+    
     console.log("Order updated:", res.data);
     fetch()
     setEditOrderOpen(false);
       setOrderLoading(false)
 
   } catch (error) {
-    // Error handling aur readable error message
+    
     if (error.response) {
       console.error("Server Error:", error.response.data);
     } else if (error.request) {
