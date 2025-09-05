@@ -1,9 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import ClientCard from '../ClientCard';
 import { fetchClients } from '../../utils/redux/slices/clientDataSlice';
+import { useGSAP } from '@gsap/react';
+import { SplitText } from 'gsap/all';
+import gsap from 'gsap';
 
 const OurClients = () => {
+    const titleRef = useRef();
   const dispatch = useDispatch();
   const { data: clients, totalCount: totalClients, loading, error, currentPage, limit } =
     useSelector((state) => state.clients);
@@ -35,10 +39,32 @@ console.log("total client:",clients);
     );
   }
 
+
+
+
+    useGSAP(() => {
+    // Animate Title
+    const titleSplit = new SplitText(titleRef.current, { type: "words" });
+    gsap.from(titleSplit.words, {
+      y: 50,
+      opacity: 0,
+      duration: 1.2,
+      ease: "power4.out",
+      stagger: 0.15,
+      scrollTrigger: {
+        trigger: ".client-container",
+        start: "top 80%",
+        end: "top 70%",
+        scrub: 0.5,
+        toggleActions: "play none none none",
+      },
+    });
+  }, []);
+
   return (
-    <div className="w-screen h-full px-4 py-8 bg-black">
+    <div className="client-container w-screen h-full px-4 py-8 bg-black">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-3xl font-semibold mb-6 text-center text-yellow-400">Our Clients</h2>
+        <h2  ref={titleRef}  className="text-4xl md:text-5xl font-extrabold text-center text-[#FFD700] mb-10">Our Clients</h2>
 
         <div
           className="grid gap-6 justify-items-center pr-3"
