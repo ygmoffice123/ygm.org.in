@@ -56,7 +56,7 @@ const Hero = () => {
         className="relative flex flex-col justify-center items-center w-full h-full gap-6 px-6 bg-center bg-cover"
         style={{ backgroundImage: `url(${heroBgImage})` }}
       >
-        <div className="absolute inset-0 bg-[#000000]/60 backdrop-blur-[1px]"></div>
+        <div className="absolute inset-0 bg-[#000000]/70 backdrop-blur-[1px]"></div>
 
         {/* Hero content */}
         <div className="h-[90%] p-5 relative pt-10 md:p-20 flex flex-col justify-center items-center gap-3 text-center">
