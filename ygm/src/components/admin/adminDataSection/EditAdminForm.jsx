@@ -6,9 +6,9 @@ import { FaUserEdit, FaEnvelope, FaUserTag, FaSave } from 'react-icons/fa';
 
 const EditAdminForm = ({ adminData, adminId }) => {
   const [formData, setFormData] = useState({
-    fullName: adminData.fullName || '',
-    username: adminData.username || '',
-    email: adminData.email || '',
+    fullName: adminData?.fullName || '',
+    username: adminData?.username || '',
+    email: adminData?.email || '',
   });
 
   const [message, setMessage] = useState('');
