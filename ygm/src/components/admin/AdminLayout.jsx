@@ -15,7 +15,7 @@ const AdminLayout = () => {
       <div className=''>
       <AdminNav/>
       </div>
-      <main className="max-w-full min-w-[80%] h-screen overflow-y-scroll ">
+      <main className="max-w-full w-full  h-screen overflow-y-scroll ">
         <Outlet />
 
 

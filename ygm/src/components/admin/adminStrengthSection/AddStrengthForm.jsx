@@ -45,7 +45,7 @@ const handleSubmit = async (e) => {
     <form
       ref={formRef}
       onSubmit={handleSubmit}
-      className="bg-black border border-[#FFD700] text-[#FFD700] rounded-2xl p-6 shadow-xl space-y-5 max-w-xl mx-auto"
+      className="bg-black border  border-[#FFD700] text-[#FFD700] rounded-2xl p-6 shadow-xl space-y-5 max-w-xl mx-auto"
     >
       <h2 className="text-2xl font-bold flex items-center gap-2 mb-2">
         <FaMedal className="text-[#FFD700]" />

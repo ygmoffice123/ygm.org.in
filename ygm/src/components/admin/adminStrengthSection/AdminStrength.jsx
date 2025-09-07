@@ -64,8 +64,8 @@ const AdminStrengths = () => {
   };
 
   return (
-    <div className="min-h-screen bg-black text-[#FFD700] px-4 md:px-12 py-10 space-y-20 font-sans">
-      <div className="text-center admin-strength-heading">
+    <div className="min-h-screen w-full  bg-black text-[#FFD700] px-4 md:px-12 py-10 space-y-20 font-sans">
+      <div className="text-center  admin-strength-heading">
         <h1 className="text-4xl md:text-5xl font-bold tracking-wide">
           Our Strengths
         </h1>
@@ -74,7 +74,7 @@ const AdminStrengths = () => {
         </p>
       </div>
 
-      <div className="add-strength-form">
+      <div className="add-strength-form ">
         <h2 className="text-2xl md:text-3xl font-semibold mb-6 flex items-center justify-center gap-2">
           <FaPlusCircle /> Add New Strength
         </h2>
@@ -107,6 +107,7 @@ const AdminStrengths = () => {
         </div>
       </div>
     </div>
+
   );
 };
 
