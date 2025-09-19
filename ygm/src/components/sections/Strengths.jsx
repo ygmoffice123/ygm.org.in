@@ -55,8 +55,8 @@ const Strengths = () => {
   }
 
   return (
-    <div className="strength-section px-4 py-12 min-h-screen flex flex-col items-center">
-      <h1 className="strength-title text-4xl md:text-5xl font-extrabold text-center text-[#FFD700] drop-shadow-sm">
+    <div className="strength-section px-4  py-12 min-h-screen flex flex-col items-center">
+      <h1 className="strength-title text-4xl md:text-5xl font-extrabold text-center mt-12 text-[#FFD700] drop-shadow-sm">
         Trusted by Standards
       </h1>
 
