@@ -8,7 +8,8 @@ const router = Router();
 // Admin-protected founder routes
 
 router.route("/fetch-founder").get(fetchAllFounder);
-router.route("/add-founder").post(authMiddleware, addFounder);
+router.route("/add-founder").post( addFounder);
+// router.route("/add-founder").post(authMiddleware, addFounder);
 router.route("/edit-founder/:id").put(authMiddleware, editFounder);
 router.route("/delete-founder/:id").delete(authMiddleware, deleteFounder);      
 

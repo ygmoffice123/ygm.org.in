@@ -27,6 +27,7 @@ import { fetchContact } from "./utils/redux/slices/contacDatatSlice.js";
 import { fetchServices } from "./utils/redux/slices/serviceDataSlice.js";
 import { fetchAdmin } from "./utils/redux/slices/adminSlice.js";
 import AdminDashboard from "./components/admin/AdminDashboard.jsx";
+import FounderForm from "./components/admin/FounderForm.jsx";
 
 
 const App = () => {
@@ -80,7 +81,8 @@ useEffect(() => {
               <Route path="services" element={<AdminService  />}/>
               <Route path="strength" element={<AdminStrengths  />} />
               <Route path="contact" element={<ContactForm  />} />
-              <Route path="founder" element={<EditFounderForm />} />
+              {/* <Route path="founder" element={<EditFounderForm />} /> */}
+              <Route path="founder" element={<FounderForm/>} />
               <Route path="about" element={<AdminAbout />} />
               <Route path="feedback" element={<AdminFeedback />} />
               <Route path="admin-logout" element={<AdminLogoutButton/>} />
