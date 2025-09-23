@@ -60,7 +60,7 @@ useEffect(() => {
       alert('Please select a related service');
       return;
     }
-    console.log(clientData);
+    // console.log(clientData);
     
 
     try {

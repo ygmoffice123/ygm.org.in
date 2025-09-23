@@ -29,7 +29,7 @@
           import.meta.env.VITE_EMAIL_JS_PUBLIC_KEY // Public key
         )
         .then(() => {
-          console.log("✅ Admin notification sent");
+          // console.log("✅ Admin notification sent");
 
           // Send auto-reply to user
           const formData = new FormData(ContactLeftRef.current);
@@ -49,7 +49,7 @@
               import.meta.env.VITE_EMAIL_JS_PUBLIC_KEY // Public key
             )
             .then(() => {
-              console.log("✅ Auto-reply sent to user");
+              // console.log("✅ Auto-reply sent to user");
               toast.success("✅ Request submitted successfully!");
               ContactLeftRef.current.reset(); // Clear form
             })

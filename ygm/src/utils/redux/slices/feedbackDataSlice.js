@@ -19,7 +19,7 @@ export const fetchFeedbacks = createAsyncThunk(
     try {
       const { currentPage, limit } = getState().feedback;
       const res = await axiosInstance.get(`/feedback/fetch-feedbacks/${currentPage}/${limit}`);
-      console.log(res.data.data);
+      // console.log(res.data.data);
       
       return res.data.data || { feedbacks: [], totalCount: 0 }; // expecting backend returns { feedbacks, totalCount }
     } catch (err) {
@@ -100,7 +100,7 @@ const feedbackSlice = createSlice({
 
       // Add feedback
       .addCase(addFeedback.fulfilled, (state, action) => {
-        console.log(action.payload);
+        // console.log(action.payload);
         
         state.data.unshift(action.payload); // add new feedback at top
         state.totalCount += 1;

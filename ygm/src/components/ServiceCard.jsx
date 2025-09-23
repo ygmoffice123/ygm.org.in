@@ -41,7 +41,7 @@ const ServiceCard = ({ data }) => {
 
   const handleGotoService = ()=>{
     const serviceId = data._id
-    console.log(serviceId);
+    // console.log(serviceId);
     navigate(`service/${serviceId}`)
   }
 

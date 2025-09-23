@@ -47,7 +47,7 @@ const handleChangeOrder = async () => {
     );
 
     
-    console.log("Order updated:", res.data);
+    // console.log("Order updated:", res.data);
     fetch()
     setEditOrderOpen(false);
       setOrderLoading(false)

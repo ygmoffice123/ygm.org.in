@@ -20,7 +20,7 @@ export const updateContact = createAsyncThunk(
   async ({ id, updatedData }, { rejectWithValue }) => {
     try {
       const res = await axiosInstance.put(`/contactInfo/update-contactInfo/${id}`, updatedData);
-      console.log(res.data.data);
+      // console.log(res.data.data);
       
       return res.data?.data || res.data;  // Adjust based on your API response shape
     } catch (err) {

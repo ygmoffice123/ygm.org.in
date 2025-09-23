@@ -14,7 +14,7 @@ useEffect(() => {
     try {
       const ResData = await axiosInstance.get("/founder/fetch-founder");
       const foundersArray = ResData?.data?.data?.founders || [];
-      console.log(foundersArray); // Optional debug
+      // console.log(foundersArray); // Optional debug
       setFounders(foundersArray);
     } catch (error) {
       console.error("Error fetching founders:", error);

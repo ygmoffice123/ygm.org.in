@@ -22,7 +22,7 @@ import {
 const AdminDashboard = () => {
   // Redux se admin ki details
   const admin = useSelector((state) => state.admin.admin.admin);
-  console.log(admin);
+  // console.log(admin);
   
 
   if (!admin) {

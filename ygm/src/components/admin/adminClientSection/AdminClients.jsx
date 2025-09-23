@@ -21,7 +21,7 @@ const AdminClients = () => {
   const [editData, setEditData] = useState(null);
 
 
-  console.log(admin);
+  // console.log(admin);
   
 
   const sectionRef = useRef();
@@ -85,9 +85,9 @@ const AdminClients = () => {
   // Edit client
   const handleEdit = async (editData) => {
 
-      console.log(editData);
+      // console.log(editData);
       setEditData(editData)
-      console.log(editData);
+      // console.log(editData);
 sectionRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
 
   }

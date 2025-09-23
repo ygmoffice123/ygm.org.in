@@ -15,7 +15,7 @@ const OurClients = () => {
   // Auto-fetch first page on mount
   useEffect(() => {
 // console.log("client:",clients.length);
-console.log("total client:",clients);
+// console.log("total client:",clients);
 
 
     if (clients.length === 0) {

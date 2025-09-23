@@ -12,11 +12,11 @@ const initialState = {
 export const fetchServices = createAsyncThunk(
   "services/fetchServices",
   async (_, { rejectWithValue }) => {
-    console.log("run");
+    // console.log("run");
     
     try {
       const res = await axiosInstance.get("/services/fetch-service");
-      console.log(res.data.data);
+      // console.log(res.data.data);
       
       return res.data?.data || [];
     } catch (err) {

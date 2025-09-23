@@ -6,7 +6,7 @@ import ChangePasswordForm from "./ChangePasswordForm";
 
 const AdminAbout = () => {
   const { admin } = useSelector((state) => state.admin.admin);
-  console.log(admin);
+  // console.log(admin);
   
 
   return (
