@@ -66,14 +66,25 @@ const OurClients = () => {
       <div className="max-w-7xl mx-auto">
         <h2  ref={titleRef}  className="text-4xl md:text-5xl font-extrabold text-center text-[#FFD700] mb-10">Our Clients</h2>
 
-        <div
+        {/* <div
           className="grid gap-6 justify-items-center pr-3"
           style={{ gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))" }}
         >
           {clients.map((item, index) => (
             <ClientCard item={item} key={index} index={index} />
           ))}
-        </div>
+        </div> */}
+
+
+<div
+  className="grid gap-6 justify-items-center pr-3 
+             [grid-template-columns:repeat(auto-fit,minmax(280px,1fr))]"
+>
+  {clients.map((item, index) => (
+    <ClientCard item={item} key={index} index={index} />
+  ))}
+</div>
+
 
         {/* Fetch More Button */}
         {clients.length < totalClients && (
