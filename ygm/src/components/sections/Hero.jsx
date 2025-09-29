@@ -25,20 +25,20 @@ const Hero = () => {
       .from(titleRef.current, {
         scale: 3,
         opacity: 0,
-        duration: 1,
+        duration: .7,
         ease: "power1.out",
       }) 
       .to(titleRef.current, { opacity: 1, duration: 0.6, ease: "none" }) // Smooth fade-in
       .from(taglineRef.current, {
         y: 50,
         opacity: 0,
-        duration: 0.6,
+        duration: 0.4,
         ease: "power2.out",
       }) // Tagline slide-in
       .from(scrollContainerRef.current, {
         y: 30,
         opacity: 0,
-        duration: 0.5,
+        duration: 0.4,
         ease: "power2.out",
       }) // Scrolling text container fade-in
       .from(ctaRef.current, {
