@@ -121,9 +121,6 @@ const ClientCard = ({ item, index, isAdmin, onDelete, onEdit, fetch }) => {
           {item.name}
         </h2>
         <p className="text-xs sm:text-sm text-[#E0E0E0] italic">
-          Service: {item.serviceType}
-        </p>
-        <p className="text-xs sm:text-sm text-[#E0E0E0] italic">
           {item.duration}
         </p>
         <p className="text-xs sm:text-sm text-[#C0C0C0] line-clamp-3">
