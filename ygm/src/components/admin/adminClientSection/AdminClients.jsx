@@ -4,13 +4,14 @@ import ClientCard from '../../ClientCard';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { toast } from 'react-hot-toast';
-import { useSelector } from 'react-redux';
+import { useSelector ,useDispatch} from 'react-redux';
 import axiosInstance from '../../../utils/axios';
 import {  FaUsers  } from "react-icons/fa";
 
 const AdminClients = () => {
   const { isAuthenticated, admin } = useSelector(state => state.admin);
   // console.log(admin.);
+  const dispatch = useDispatch();
   
 
   // const [isAdmin , setIsAdmin] = useState(isAuthenticated && admin?.admin?.role === 'admin')
@@ -21,8 +22,7 @@ const AdminClients = () => {
   const [editData, setEditData] = useState(null);
 
 
-  // console.log(admin);
-  
+  // console.log(admin);  
 
   const sectionRef = useRef();
 
