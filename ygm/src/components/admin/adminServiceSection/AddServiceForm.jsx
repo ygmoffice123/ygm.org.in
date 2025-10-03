@@ -3,26 +3,29 @@ import { useDispatch } from "react-redux";
 import { addService, updateService } from "../../../utils/redux/slices/serviceDataSlice.js";
 import { toast } from "react-hot-toast";
 
-const AddServiceForm = ({ isEdit = false, editData = null }) => {
+
+const AddServiceForm = ({isEdit = false,editData=null}) => {
   const dispatch = useDispatch();
 
-  const [formData, setFormData] = useState({});
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    if (isEdit) {
-      setFormData(editData);
-    } else {
-      setFormData({
-        title: "",
-        descriptionShort: "",
-        descriptionLong: "",
-        clientNo: 0,
-        employeeNo: 0,
-        image: "",
-      });
+  const [formData, setFormData] = useState({})
+  useEffect(()=>{
+    if(isEdit){
+setFormData(editData)
+    } 
+    else{
+        setFormData( {
+    title: "",
+    descriptionShort: "",
+    descriptionLong: "",
+    clientNo: 0,
+    employeeNo: 0,
+    image: "",
+  });
     }
-  }, [editData]);
+
+  },[editData])
+
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -39,46 +42,46 @@ const AddServiceForm = ({ isEdit = false, editData = null }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    // Basic validation
     if (!formData.title || !formData.descriptionShort || !formData.descriptionLong) {
       toast.error("Please fill all required fields");
       return;
     }
 
     try {
-      setLoading(true);
-      if (isEdit) {
-        await dispatch(
-          updateService({
-            id: editData._id,
-            serviceData: formData,
-          })
-        ).unwrap();
+       if(isEdit){
+      await dispatch(
+    updateService({
+      id: editData._id,
+      serviceData: formData, // use updated formData, not old editData
+    })
+  ).unwrap();
 
-        toast.success("Service edited successfully");
-      } else {
-        await dispatch(addService(formData)).unwrap();
-        toast.success("Service added successfully");
-        setFormData({
-          title: "",
-          descriptionShort: "",
-          descriptionLong: "",
-          clientNo: 0,
-          employeeNo: 0,
-          image: "",
-        });
-      }
+  toast.success("Service edited successfully");
+
+       }else{ 
+      await dispatch(addService(formData)).unwrap();
+      toast.success("Service added successfully");
+      setFormData({
+        title: "",
+        descriptionShort: "",
+        descriptionLong: "",
+        clientNo: 0,
+        employeeNo: 0,
+        image: "",
+      });
+    }
     } catch (error) {
       toast.error(error || "Failed to add service");
-    } finally {
-      setLoading(false);
     }
   };
 
   return (
     <form
       onSubmit={handleSubmit}
-      className="space-y-6 bg-black p-6 rounded-xl shadow-lg"
+      className="space-y-6 bg-black  p-6 rounded-xl shadow-lg"
     >
+   
       {/* Title */}
       <div>
         <label className="block mb-2 font-medium text-[#FFD700]">Title *</label>
@@ -94,9 +97,7 @@ const AddServiceForm = ({ isEdit = false, editData = null }) => {
 
       {/* Short Description */}
       <div>
-        <label className="block mb-2 font-medium text-[#FFD700]">
-          Short Description *
-        </label>
+        <label className="block mb-2 font-medium text-[#FFD700]">Short Description *</label>
         <textarea
           name="descriptionShort"
           value={formData.descriptionShort}
@@ -109,9 +110,7 @@ const AddServiceForm = ({ isEdit = false, editData = null }) => {
 
       {/* Long Description */}
       <div>
-        <label className="block mb-2 font-medium text-[#FFD700]">
-          Long Description *
-        </label>
+        <label className="block mb-2 font-medium text-[#FFD700]">Long Description *</label>
         <textarea
           name="descriptionLong"
           value={formData.descriptionLong}
@@ -165,14 +164,9 @@ const AddServiceForm = ({ isEdit = false, editData = null }) => {
       {/* Submit Button */}
       <button
         type="submit"
-        disabled={loading}
-        className={`w-full py-3 rounded-lg font-semibold transition ${
-          loading
-            ? "bg-gray-500 text-gray-300 cursor-not-allowed"
-            : "bg-[#FFD700] text-black hover:bg-yellow-500"
-        }`}
+        className="w-full py-3 rounded-lg bg-[#FFD700] text-black font-semibold hover:bg-yellow-500 transition"
       >
-        {loading ? "Processing..." : isEdit ? "Update Service" : "Add Service"}
+        Add Service
       </button>
     </form>
   );
